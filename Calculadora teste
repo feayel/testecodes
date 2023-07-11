@@ -1,0 +1,178 @@
+// HTML
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora</title>
+  <link rel="stylesheet" type="text/css" href="calc1.css">
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="resultado" readonly>
+    <div class="buttons">
+      <button onclick="limpar()">C</button>
+      <button onclick="inserir('/')">÷</button>
+      <button onclick="inserir('*')">×</button>
+      <button onclick="apagar()">←</button>
+      <button onclick="inserir('7')">7</button>
+      <button onclick="inserir('8')">8</button>
+      <button onclick="inserir('9')">9</button>
+      <button onclick="inserir('-')">-</button>
+      <button onclick="inserir('4')">4</button>
+      <button onclick="inserir('5')">5</button>
+      <button onclick="inserir('6')">6</button>
+      <button onclick="inserir('+')">+</button>
+      <button onclick="inserir('1')">1</button>
+      <button onclick="inserir('2')">2</button>
+      <button onclick="inserir('3')">3</button>
+      <button class="button-equal" onclick="calcular()">=</button>
+      <button class="button-zero" onclick="inserir('0')">0</button>
+      <button class="button-dot" onclick="inserir('.')">.</button>
+    </div>
+  </div>
+
+  <script src="calc1.js"></script>
+</body>
+</html>
+
+
+// CSS
+
+.calculator {
+    width: 300px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  input {
+    width: 95%;
+    height: 28px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: right;
+    padding-right: 10px;
+  }
+  
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+  }
+  
+  .button-zero {
+    grid-column: span 2;
+  }
+  
+  .button-dot {
+    margin-right: 1px;
+  }
+  
+  
+  button {
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  
+  button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  button:active {
+    background-color: #d3d3d3;
+  }
+  
+  .button-equal {
+    grid-column: span 1; /* Alterado para ocupar 2 colunas */
+    grid-row: span 2; /* Adicionado para ocupar 2 linhas */
+    height: 85px; /* Aumentado a altura para 80px */
+    width: 100%;
+  }
+
+//
+
+// Referência para o campo de resultado
+const campoResultado = document.getElementById('resultado');
+
+// Variável para controlar se o resultado foi exibido
+let resultadoExibido = false;
+
+// Função para inserir os caracteres no campo de resultado
+function inserir(caracter) {
+  if (resultadoExibido && !isNaN(caracter)) {
+    campoResultado.value = caracter;
+    resultadoExibido = false;
+  } else {
+    campoResultado.value += caracter;
+  }
+}
+
+// Função para limpar o campo de resultado
+function limpar() {
+  campoResultado.value = '';
+  resultadoExibido = false;
+}
+
+// Função para apagar o último caracter do campo de resultado
+function apagar() {
+  campoResultado.value = campoResultado.value.slice(0, -1);
+}
+
+// Função para realizar o cálculo
+function calcular() {
+  try {
+    const resultado = eval(campoResultado.value);
+    campoResultado.value = resultado;
+    resultadoExibido = true;
+  } catch (error) {
+    campoResultado.value = 'Erro';
+    resultadoExibido = true;
+  }
+}
+
+
+// CÓDIGO 2 JS
+
+// Referência para o campo de resultado
+var resultadoField = document.getElementById('resultado');
+
+// Variável para controlar se o campo deve ser limpo após o cálculo
+var limparCampo = false;
+
+// Função para inserir os caracteres no campo de resultado
+function inserir(caracter) {
+  if (limparCampo) {
+    resultadoField.value = '';
+    limparCampo = false;
+  }
+  resultadoField.value += caracter;
+}
+
+// Função para limpar o campo de resultado
+function limpar() {
+  resultadoField.value = '';
+}
+
+// Função para apagar o último caracter do campo de resultado
+function apagar() {
+  resultadoField.value = resultadoField.value.slice(0, -1);
+}
+
+// Função para realizar o cálculo
+function calcular() {
+  try {
+    var resultado = eval(resultadoField.value);
+    resultadoField.value = resultado;
+    limparCampo = true;
+  } catch (error) {
+    resultadoField.value = 'Erro';
+  }
+}
