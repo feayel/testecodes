@@ -97,7 +97,7 @@
     width: 100%;
   }
 
-//
+// JAVASCRIPT
 
 // Referência para o campo de resultado
 const campoResultado = document.getElementById('resultado');
@@ -139,7 +139,7 @@ function calcular() {
 }
 
 
-// CÓDIGO 2 JS
+// CÓDIGO 2 JAVASCRIPT
 
 // Referência para o campo de resultado
 var resultadoField = document.getElementById('resultado');
